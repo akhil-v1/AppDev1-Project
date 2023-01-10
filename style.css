@@ -16,7 +16,7 @@ body {
     padding: 4px;
 }
 
-.signup-button {
+.top-bar-button {
     background-color: #222edb;
     width: 70px;
     text-align: center;
@@ -24,7 +24,7 @@ body {
     float: right;
 }
 
-.login-bar {
+.login-signup-bar {
     background-color: white;
     width: 800px;
     margin: auto;
