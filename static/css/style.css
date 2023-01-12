@@ -1,0 +1,158 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9ebee;
+}
+
+.top_bar {
+    height: 130px;
+    /* background-color: rgb(237, 101, 124); */
+    background-color: rgb(172, 58, 41);
+    color: #ebd9d9;
+}
+
+.name {
+    font-size: 40px;
+    padding: 4px;
+}
+
+.top_bar_button {
+    background-color: #3bdb22;
+    width: 70px;
+    text-align: center;
+    padding: 4px;
+    float: right;
+}
+
+.login_signup_bar {
+    background-color: white;
+    width: 800px;
+    margin: auto;
+    margin-top: '50px';
+    padding: 10px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.text {
+    height: 40px;
+    width: 300px;
+    padding: 4px;
+    font-size: 14px;
+}
+
+.button {
+    width: 300px;
+    height: 40px;
+    font-weight: bold;
+    background-color: rgb(219, 101, 83);
+    color: white;
+}
+
+.red_bar {
+    height: 50px;
+    background-color: rgb(172, 58, 41);
+    color: #ebd9d9;
+}
+
+.red_bar_text {
+    margin-left: 24%;
+    width: 75%;
+    margin-right: 1%;
+    /* margin: auto; */
+    font-size: 30px;
+}
+
+.search_box {
+    width: 400px;
+    height: 30px;
+    font-size: 20px;
+    /* background-image: url(/static/images/search.png); */
+    background-repeat: no-repeat;
+    background-position: right;
+
+}
+
+.content {
+    width: 800px;
+    margin: auto;
+    min-height: 400px;
+}
+
+.content_text {
+    background-color: white;
+    text-align: center;
+    color: #ca5555;
+    font-size: 35px;
+}
+
+.profile_pic {
+    width: 150px;
+    margin-top: -200px;
+    border-radius: 50%;
+    border: solid 2px white;
+}
+
+.menu_buttons {
+    width: 100px;
+    display: inline-block;
+    margin: 2px;
+    font-size: 15px;
+
+}
+
+.post_area {
+    border: solid thin #ebd9d9;
+    /* padding: 10px; */
+    width: 100%;
+    margin-top: 10px;
+}
+
+textarea {
+    /* width: 100%; */
+    border: none;
+    font-family: tahoma;
+    font-size: 20px;
+    height: 400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.friends_bar {
+    background-color: white;
+    min-height: 400px;
+    margin-top: 20px;
+    color: #aaa;
+    padding: 8px;
+    text-align: left;
+}
+
+.friends {
+    clear: both;
+    color: #ca5555;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.posts_bar {
+    margin-top: 20px;
+    background-color: white;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.post {
+    padding: 4px;
+    font-size: 13px;
+}
+
+.profile_headers {
+    font-size: 30px;
+    color: #ca5555;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}

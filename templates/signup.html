@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>Blog-Lite | Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+
+<body>
+    <div class="top_bar">
+        <div>
+            <a href="/"
+                style="text-decoration: none; color: white; font-family: Tahoma; font-size: 70px; margin-left: 20px;">Blog-Lite</a>
+
+            <br>
+            <p style="color: white; margin-left: 20px;">Pen down your thoughts and share it with the world.</p>
+            <!-- <a href="/signup" style="text-decoration: none; color: white; float: right; margin-right: 20px; margin-top: 20px;">Signup</a> -->
+        </div>
+
+        <!-- <div class="name">Blog-Lite </div> -->
+        <!-- <a href="/"><button type="button" class="top_bar_button">Login</button></a> -->
+    </div>
+    <div style="text-align: center;" class="danger">
+        {{ error }}
+    </div>
+    <br>
+    <div class="login_signup_bar" style="width: fit-content;">
+        <form action="/signup" method="post">
+            Create your account<br><br>
+            <!-- <label>First Name: </label> -->
+            <input id="fn_id" name="firstname" type="text" class="text" placeholder="First Name" required><br><br>
+            <!-- <label>Last Name: </label> -->
+            <input id="ln_id" name="lastname" type="text" class="text" placeholder="Last Name" required><br><br>
+            <!-- <label>Username: </label> -->
+            <input id="un_id" name="username" type="text" class="text" placeholder="Username" required><br><br>
+            <!-- <label>Email: </label> -->
+            <input id="em_id" name="email" type="email" class="text" placeholder="Email" required><br><br>
+            <!-- <label>Password: </label> -->
+            <input id="pwd_id" name="password" type="password" class="text" placeholder="Password" required><br><br>
+
+            <button type="submit" class="button">Sign Up</button><br><br>
+            <hr style="color: wheat">
+            <br>
+        </form>
+        <div>
+            <a href="/" style="color: white;"><button class="button" style="background-color: rgb(59, 176, 59);">Log
+                    in</button></a>
+        </div><br><br>
+    </div>
+
+
+</body>
+
+</html>

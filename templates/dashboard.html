@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>Welcome To Blog Lite!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+
+<body style="background-color:#ebd9d9;">
+    <div class="top_bar">
+        <div>
+            <a href="/"
+                style="text-decoration: none; color: white; font-family: Tahoma; font-size: 70px; margin-left: 20px;">Blog-Lite</a>
+            <!-- <p style="text-align: center;">Welcome {{username}}!! &nbsp &nbsp</p> -->
+            <br>
+            <!-- <span style="color: white; margin-left: 20px;">Welcome {{username}}</span> -->
+            <!-- <a href="/signup" style="text-decoration: none; color: white; float: right; margin-right: 20px; margin-top: 20px;">Signup</a> -->
+        </div>
+
+        <div class="red_bar_text" style="text-align: right;">
+            <div style="width: fit-content; display: inline-block;">
+                <form action="/ab?" method="post">
+                    <input type="text" class="search_box" placeholder="Search for people">
+                    <button type="submit"><img src="/static/images/search.png" style="height: 20"></button>
+                </form>
+            </div>
+            <div style="display: inline-block;">
+                <a href="/profile/{{username}}"
+                    style="text-decoration: none; color: white; font-size: medium;"><span>MyProfile | </span></a>
+                <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span>Logout</span></a>
+            </div>
+        </div>
+        <!-- <div style="text-align: right;">
+            <a href="/profile/{{username}}"><span>MyProfile</span></a>
+            <a href="/login"><span>Logout</span></a>
+        </div> -->
+    </div>
+
+    <div style="display: flex;">
+        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 25%;">
+            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">New Blog...
+            </div>
+
+            <div class="post_area">
+                <form action="/dashboard/{{username}}" method="post" enctype="multipart/form-data">
+                    <input style="border: soft;height: 30px; width: 100%;" type="text" name="post_title"
+                        placeholder="Title" required><br>
+                    <input
+                        style="border: soft;height: 100px; overflow: scroll; margin-top: 5px; width: 100%; text-align: left; vertical-align: text-top;"
+                        type="text" name="post_des" placeholder="Content" required><br>
+                    <span>Upload: <input name="post_img" type="file" style="margin-top: 10px;"></span><br>
+                    <button style="margin-top: 10px; width: 100%; background-color: blue;" type="submit"
+                        class="button">Post</button><br>
+                </form>
+            </div>
+        </div>
+
+        <!-- <div style="min-height: 400px;flex: 1;">
+            <div style="border: none;background-color: #ebd9d9; text-align: center; " class="content_text">New Blog...
+            </div>
+
+            <div class="post_area">
+                <form action="/welcome/{{username}}" method='post' enctype='multipart/form-data'>
+                    <input style="border: none;height: 30px; margin-right: 10px;" type="text" name="post_title"
+                        placeholder="Title" required><br>
+                    <textarea name="post_des" placeholder="Whats on your mind?" required></textarea><br>
+                    <span>Upload Image <input name="post_img" type="file"><br></span>
+                    <button style="float:left;margin-top: 5px;" type="submit" class="button">submit</button><br>
+                </form>
+            </div>
+        </div> -->
+
+        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
+            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">Your feed
+            </div>
+            {% for post in posts %}
+            <div class="posts_bar">
+                <div class="post">
+                    <div style="color: #ca5555;font-weight: bold;">
+                        <a href="/profile/{{post.img_id.split('_')[0]}}"
+                            style="text-decoration: none; color: blue;">{{post.img_id.split('_')[0]}}</a> >
+                        {{post.name}}
+                    </div><br>
+                    <span>{{post.caption}}</span><br>
+                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    <!-- <div>{{post.caption}}</div> -->
+                    <br><br>
+
+                    <a href="/edit_post">Edit</a> <a href="/delete_post">Delete</a> . <span
+                        style="color: #999;">{{post.timestamp.date()}}</span>
+                </div><br>
+            </div>
+            {%endfor%}
+        </div>
+        <!-- <div style="min-height: 200px;flex: 1.5; ">
+            <div style=" border: none;background-color: #ebd9d9; text-align:justify;" class="content_text">Your Feed
+            </div>
+            {%for post in posts %}
+            <div class="posts_bar">
+                <div class="post">
+                    <div style="color: #ca5555;font-weight: bold;">
+                        {{post.id}} -> {{post.name}}
+                    </div><br>
+                    <img src="data:image/png;base64,{{image_url}}" />
+                    <div>{{post.caption}}</div>
+                    <br><br>
+
+                    <a href="">Like</a> . <a href="">Edit</a> . <a href="">Delete</a> . <span
+                        style="color: #999;">{{post.timestamp.date()}}</span>
+                </div><br>
+            </div>
+            {%endfor%}
+        </div> -->
+    </div>
+
+
+
+</body>
+
+</html>
