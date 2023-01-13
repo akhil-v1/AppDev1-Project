@@ -1,15 +1,18 @@
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Tahoma, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e9ebee;
+    /* background-color: #e9ebee; */
+    background-color: white;
 }
 
 .top_bar {
-    height: 130px;
+    height: 40px;
     /* background-color: rgb(237, 101, 124); */
     background-color: rgb(172, 58, 41);
     color: #ebd9d9;
+    width: 100%;
+    /* font-size: medium; */
 }
 
 .name {
@@ -52,26 +55,27 @@ body {
 }
 
 .red_bar {
-    height: 50px;
+    height: 20%;
     background-color: rgb(172, 58, 41);
     color: #ebd9d9;
 }
 
 .red_bar_text {
-    margin-left: 24%;
-    width: 75%;
-    margin-right: 1%;
+    height: 100%;
+    margin-left: 0.5%;
+    width: 100%;
+    margin-right: 0.5%;
     /* margin: auto; */
-    font-size: 30px;
+    font-size: 200%;
 }
 
 .search_box {
-    width: 400px;
-    height: 30px;
+    width: auto;
+    height: auto;
     font-size: 20px;
     /* background-image: url(/static/images/search.png); */
-    background-repeat: no-repeat;
-    background-position: right;
+    /* background-repeat: no-repeat;
+    background-position: right; */
 
 }
 
@@ -123,11 +127,13 @@ textarea {
 
 .friends_bar {
     background-color: white;
-    min-height: 400px;
+    /* min-height: 400px; */
     margin-top: 20px;
+    height: 30%;
     color: #aaa;
     padding: 8px;
     text-align: left;
+    overflow: scroll;
 }
 
 .friends {
@@ -150,9 +156,8 @@ textarea {
 }
 
 .profile_headers {
-    font-size: 30px;
+    font-size: 25px;
     color: #ca5555;
-    font-weight: bold;
-    text-align: center;
+    text-align: left;
     margin-top: 10px;
 }

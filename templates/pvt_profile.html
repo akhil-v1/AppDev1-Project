@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile | Blog-Lite</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+</head>
+
+<body style="background-color:#ebd9d9;">
+    <div class="top_bar">
+        <div id="app_name" style="display: inline-block; width: 40%; height: 40px;">
+            <span style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+                Blog-Lite</span>
+            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+                |</span>
+            <span style="vertical-align:super; font-weight: bold; color: white;">
+                {{current_user_data.followers_count}} Followers | {{current_user_data.following_count}} Following |
+                {{current_user_data.posts_count}} Posts |</span>
+        </div>
+        <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
+            <span>
+                <form action="/{{current_user}}/search" method="post">
+                    <div style="height: 40px; vertical-align: middle;">
+                        <input name='user_query' type="text" class="search_box" placeholder="Find people...">
+                        <button type="submit"><img src="/static/images/search.png"></button>
+                    </div>
+                </form>
+            </span>
+        </div>
+        <div id="options" style="display: inline-block; width: 30%; text-align: right;">
+            <a href=" /{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
+                <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
+            <a href=" /{{current_user}}/{{current_user}}/profile"
+                style="text-decoration: none; color: white; font-size: medium;">
+                <span style="font-weight: bold; vertical-align: super;">Public view |</span></a>
+            <a href=" /{{current_user}}" style="text-decoration: none; color: white; font-size: medium;">
+                <span style="font-weight: bold; vertical-align: super;">My Dashboard | </span></a>
+            <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
+                    style="font-weight: bold; vertical-align: super;">Logout</span></a>
+        </div>
+    </div>
+
+    <div style="display: flex;">
+        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 25%;">
+            <div class="profile_headers">
+                Followed by
+            </div>
+            <div class="friends_bar">
+                {%for user in users_data%}
+                {% if current_user_data.followers and (user.id|string in current_user_data.followers.split('_'))%}
+                <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
+                    style="text-decoration: none;">{{user.username}}</a>
+                {%endif%}
+                <br>
+                {%endfor%}
+            </div>
+            <div class="profile_headers">
+                Following
+            </div>
+            <div class="friends_bar">
+                {%for user in users_data%}
+                {%if (current_user_data.following) and user.id|string in
+                current_user_data.following.split('_')%}
+                <a href="/{{current_user}}/{{user.username}}/profile" class="friends">
+                    {{user.username}}
+                </a>
+                {%endif%}
+                <br>
+                {%endfor%}
+            </div>
+        </div>
+
+        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
+            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
+                My activity
+            </div>
+            {% for post in my_posts %}
+            <div class="posts_bar">
+                <div class="post">
+                    <div style="color: #ca5555;font-weight: bold;">
+                        <a href="/{{post.img_id.split('_')[0]}}/account"
+                            style="text-decoration: none; color: blue;">{{post.img_id.split('_')[0]}}</a>
+                        > {{post.name}}
+                    </div>
+                    <br>
+                    <span>{{post.caption}}</span>
+                    <br>
+                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    <br><br>
+                    <a href="/{{current_user}}/{{post.id}}/edit_post">Edit</a> . <a
+                        href="/{{current_user}}/{{post.id}}/delete_post">Delete</a> .
+                    <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
+                </div>
+                <br>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</body>
+
+</html>

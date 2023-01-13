@@ -13,11 +13,11 @@
             <span
                 style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">Blog-Lite</span>
             <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">|</span>
-            <span style="vertical-align:super; font-weight: bold; color: white;">My dashboard</span>
+            <span style="vertical-align:super; font-weight: bold; color: white;">Edit Post</span>
         </div>
         <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
             <span>
-                <form action="/{{current_user}}/search" method="post">
+                <form action="/{{current_user_data.username}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
                         <input name='user_query' type="text" class="search_box" placeholder="Find people...">
                         <button type="submit"><img src="/static/images/search.png"></button>
@@ -26,10 +26,9 @@
             </span>
         </div>
         <div id="options" style="display: inline-block; width: 30%; text-align: right;">
-            <a href=" /{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
+            <a href=" /{{current_user_data.username}}/account"
+                style="text-decoration: none; color: white; font-size: medium;">
                 <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
-            <a href=" /{{current_user}}" style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Dashboard | </span></a>
             <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
                     style="font-weight: bold; vertical-align: super;">Logout</span></a>
         </div>
@@ -37,28 +36,28 @@
 
     <div style="display: flex;">
 
-        <div id="user_feed" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 100%;">
-            {%if isData%}
+        <div id="edit_post" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
             <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
-                Search results for {{user_query}}
+                Edit your post
             </div>
-            <div class="posts_bar">
-                <div class="post">
-                    <div style="color: #ca5555;font-weight: bold;">
-                        {% for user_data in user_query_data %}
-                        <a href="/{{current_user}}/{{user_data.username}}/profile"
-                            style="text-decoration: none; color: blue;">{{user_data.first_name}}
-                            {{user_data.last_name}} ({{user_data.username}})</a> <br>
-                        Email: {{user_data.email}}<br><br>
-                        {%endfor%}
-                    </div>
-                </div>
+            <div class="post_area">
+                <form action="/{{current_user_data.username}}/{{post_data.id}}/edit_post" method="post"
+                    enctype="multipart/form-data">
+                    <input style="border: soft;height: 30px; width: 100%;" type="text" name="post_title"
+                        value={{post_data.name}} required>
+                    <br>
+                    <input
+                        style="border: soft;height: 100px; overflow: scroll; margin-top: 5px; width: 100%; text-align: left; vertical-align: text-top;"
+                        type="text" name="post_des" value={{post_data.caption}} required>
+                    <br>
+                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post_data.img_id}}" />
+                    <span>Upload: <input name="post_img" type="file" style="margin-top: 10px;"></span>
+                    <br>
+                    <button style="margin-top: 10px; width: 100%; background-color: blue;" type="submit"
+                        class="button">Update</button>
+                    <br>
+                </form>
             </div>
-            {%else%}
-            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
-                No results for {{user_query}}
-            </div>
-            {%endif%}
         </div>
     </div>
 

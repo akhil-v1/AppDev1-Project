@@ -15,30 +15,25 @@ class User(db.Model):
     followers_count = db.Column(db.Integer(), nullable=False)
     following_count = db.Column(db.Integer(), nullable=False)
     posts_count = db.Column(db.Integer(), nullable=False)
-    posts = db.relationship('Post', secondary='user_posts',
-                            lazy=True, backref=db.backref("User", lazy=True))
+    followers = db.Column(db.String(), nullable=True)
+    following = db.Column(db.String(), nullable=True)
+    posts = db.relationship('Post', secondary='UserPosts',
+                            backref='User', cascade='all,delete')
 
 
 class Post(db.Model):
     __tablename__ = 'Post'
-    id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer(), nullable=False,
+                   primary_key=True, autoincrement=True)
     name = db.Column(db.String(), nullable=True)
     caption = db.Column(db.String(), nullable=True)
-    # Image = db.Column(db.String(), nullable=True)
     img_id = db.Column(db.String(), nullable=True, unique=True)
     timestamp = db.Column(db.DateTime(timezone=True),
                           default=datetime.now, nullable=False)
 
 
-# class UserPost(db.Model):
-#     __tablename__ = 'user_post'
-#     userpostID = db.Column(db.Integer(), primary_key=True, autoincrement=True)
-#     userID = db.Column(db.Integer(), db.ForeignKey('user.id'))
-#     postID = db.Column(db.Integer(), db.ForeignKey('post.id'))
-
-user_posts = db.Table('user_posts',
-                      db.Column('user_id', db.Integer, db.ForeignKey(
-                          User.id), primary_key=True),
-                      db.Column('post_id', db.Integer, db.ForeignKey(
-                          Post.id), primary_key=True)
-                      )
+class UserPosts(db.Model):
+    __tablename__ = 'UserPosts'
+    userpostID = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    userID = db.Column(db.Integer(), db.ForeignKey('User.id'))
+    postID = db.Column(db.Integer(), db.ForeignKey('Post.id'))
