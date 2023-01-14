@@ -21,13 +21,14 @@
                 {{user_profile_data.posts_count}} Posts |</span>
 
             {%if isFollowed%}
-            <a href="/{{current_user}}/{{user_profile}}/unfollow"
+            <a href="/{{current_user}}/{{user_profile_data.username}}/unfollow"
                 style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">Unfollow {{user_profile}}</span></a>
+                <span style="font-weight: bold; vertical-align: super;">Unfollow
+                    {{user_profile_data.username}}</span></a>
             {%else%}
-            <a href="/{{current_user}}/{{user_profile}}/follow"
+            <a href="/{{current_user}}/{{user_profile_data.username}}/follow"
                 style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">Follow {{user_profile}}</span></a>
+                <span style="font-weight: bold; vertical-align: super;">Follow {{user_profile_data.username}}</span></a>
             {%endif%}
         </div>
         <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
@@ -56,43 +57,59 @@
                 Followed by
             </div>
             <div class="friends_bar">
+                {%if user_profile_data.followers%}
                 {%for user in users_data%}
-                {% if user_profile_data.followers and (user.id|string in user_profile_data.followers.split('_'))%}
+                {% if (user.id|string in user_profile_data.followers.split('_'))%}
+                {%if user.username == current_user%}
+                <a href="/{{current_user}}/account" class="friends"
+                    style="text-decoration: none;">{{user.username}}</a><br>
+                {%else%}
                 <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.username}}</a><br>
                 {%endif%}
+                {%endif%}
                 {%endfor%}
+                {%endif%}
             </div>
             <div class="profile_headers">
                 Following
             </div>
             <div class="friends_bar">
+                {%if user_profile_data.following%}
                 {%for user in users_data%}
-                {% if user_profile_data.following and (user.id|string in user_profile_data.following.split('_'))%}
-                <a href="/{{current_user}}/{{user.username}}/profile" class="friends">
-                    {{user.username}}
+                {%if (user.id|string in user_profile_data.following.split('_'))%}
+                {%if user.username == current_user%}
+                <a href="/{{current_user}}/account" class="friends"
+                    style="text-decoration: none;">{{user.username}}</a><br>
+                {%else%}
+                <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
+                    style="text-decoration: none;">{{user.username}}</a><br>
+                {%endif%}
                 </a><br>
                 {%endif%}
                 {%endfor%}
+                {%endif%}
             </div>
         </div>
 
         <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
             <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
-                {{user_profile}}'s activity
+                {{user_profile_data.username}}'s activity
             </div>
             {% for post in user_profile_posts %}
             <div class="posts_bar">
                 <div class="post">
                     <div style="color: #ca5555;font-weight: bold;">
-                        <a href="/{{current_user}}/{{post.img_id.split('_')[0]}}/profile"
-                            style="text-decoration: none; color: blue;">{{post.img_id.split('_')[0]}}</a>
+                        <a href="/{{current_user}}/{{user_profile_data.username}}/profile"
+                            style="text-decoration: none; color: blue;">{{user_profile_data.usernmae}}</a>
                         > {{post.name}}
                     </div>
                     <br>
                     <span>{{post.caption}}</span>
                     <br>
+                    {%if post.img_id%}
                     <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    {%endif%}
                     <br><br>
                     <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
                 </div>

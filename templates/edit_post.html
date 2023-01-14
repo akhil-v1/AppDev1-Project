@@ -50,7 +50,9 @@
                         style="border: soft;height: 100px; overflow: scroll; margin-top: 5px; width: 100%; text-align: left; vertical-align: text-top;"
                         type="text" name="post_des" value={{post_data.caption}} required>
                     <br>
+                    {%if post_data.img%}
                     <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post_data.img_id}}" />
+                    {%endif%}
                     <span>Upload: <input name="post_img" type="file" style="margin-top: 10px;"></span>
                     <br>
                     <button style="margin-top: 10px; width: 100%; background-color: blue;" type="submit"

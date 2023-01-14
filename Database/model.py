@@ -25,6 +25,7 @@ class Post(db.Model):
     __tablename__ = 'Post'
     id = db.Column(db.Integer(), nullable=False,
                    primary_key=True, autoincrement=True)
+    creator = db.Column(db.String(), nullable=False)
     name = db.Column(db.String(), nullable=True)
     caption = db.Column(db.String(), nullable=True)
     img_id = db.Column(db.String(), nullable=True, unique=True)

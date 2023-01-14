@@ -46,9 +46,15 @@
                 <div class="post">
                     <div style="color: #ca5555;font-weight: bold;">
                         {% for user_data in user_query_data %}
+                        {% if user_data.username == current_user%}
+                        <a href="/{{current_user}}/account"
+                            style="text-decoration: none; color: blue;">{{user_data.last_name}},
+                            {{user_data.first_name}} ({{user_data.username}})</a> <br>
+                        {%else%}
                         <a href="/{{current_user}}/{{user_data.username}}/profile"
-                            style="text-decoration: none; color: blue;">{{user_data.first_name}}
-                            {{user_data.last_name}} ({{user_data.username}})</a> <br>
+                            style="text-decoration: none; color: blue;">{{user_data.last_name}},
+                            {{user_data.first_name}} ({{user_data.username}})</a> <br>
+                        {%endif%}
                         Email: {{user_data.email}}<br><br>
                         {%endfor%}
                     </div>

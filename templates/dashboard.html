@@ -26,7 +26,7 @@
             </span>
         </div>
         <div id="options" style="display: inline-block; width: 30%; text-align: right;">
-            <a href=" /{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
+            <a href="/{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
                 <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
             <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
                     style="font-weight: bold; vertical-align: super;">Logout</span></a>
@@ -65,19 +65,21 @@
             <div class="posts_bar">
                 <div class="post">
                     <div style="color: #ca5555;font-weight: bold;">
-                        {% if post.img_id.split('_')[0] == current_user %}
+                        {% if post.creator == current_user %}
                         <a href="/{{current_user}}/account"
-                            style="text-decoration: none; color: blue;">{{post.img_id.split('_')[0]}}</a> >
+                            style="text-decoration: none; color: blue;">{{post.creator}}</a> >
                         {%else%}
-                        <a href="/{{current_user}}/{{post.img_id.split('_')[0]}}/profile"
-                            style="text-decoration: none; color: blue;">{{post.img_id.split('_')[0]}}</a> >
+                        <a href="/{{current_user}}/{{post.creator}}/profile"
+                            style="text-decoration: none; color: blue;">{{post.creator}}</a> >
                         {%endif%}
                         {{post.name}}
                     </div>
                     <br>
                     <span>{{post.caption}}</span>
                     <br>
+                    {%if post.img%}
                     <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    {%endif%}
                     <br><br>
                     <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
                 </div>
