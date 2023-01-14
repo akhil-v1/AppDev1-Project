@@ -124,17 +124,18 @@ def dashboard(current_user):
         current_user_data = User.query.filter_by(username=current_user).first()
 
         post_title, post_des = request.form['post_title'], request.form['post_des']
+        img_id = f'{current_user}_{current_user_data.posts_count + 1}'
         new_post = Post(creator=current_user_data.username,
-                        name=post_title, caption=post_des)
+                        name=post_title, caption=post_des, contains_img=False, img_id=img_id)
 
         if request.files['post_img']:
             post_img = Image.open(request.files['post_img'])
-            img_id = f'{current_user}_{current_user_data.posts_count + 1}.png'
 
-            post_img_pth = os.path.join(app.config['UPLOAD_FOLDER'], img_id)
+            post_img_pth = os.path.join(
+                app.config['UPLOAD_FOLDER'], img_id+'.png')
             post_img.save(post_img_pth)
 
-            new_post.img_id = img_id
+            new_post.contains_img = True
 
         current_user_data.posts_count += 1
         current_user_data.posts.append(new_post)
@@ -153,7 +154,7 @@ def search(current_user):
 
 @app.route('/<string:current_user>/search?name=<string:user_query>', methods=['GET'])
 def search_user(current_user, user_query):
-    user_query_data = db.session.query(User).filter(or_(User.email.like(f'%{user_query}%'), User.username.like(
+    user_query_data = db.session.query(User).filter(or_(User.email.like('%' + str(user_query.split('@')) + '%'), User.username.like(
         f'%{user_query}%'), User.first_name.like(f'%{user_query}%'), User.last_name.like('%' + str(user_query) + '%'))).all()
     return render_template('result.html', user_query=user_query, user_query_data=user_query_data, current_user=current_user, isData=True if user_query_data else False)
 
@@ -259,15 +260,20 @@ def edit_post(current_user, post_id):
         post_data.caption = request.form['post_des']
 
         temp_id = post_data.img_id
-        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], temp_id))
+        if post_data.contains_img:
+            os.remove(os.path.join(
+                app.config['UPLOAD_FOLDER'], temp_id+'.png'))
+            post_data.contains_img = False
 
         if request.files['post_img']:
             post_img = Image.open(request.files['post_img'])
 
-            post_img_pth = os.path.join(app.config['UPLOAD_FOLDER'], temp_id)
+            post_img_pth = os.path.join(
+                app.config['UPLOAD_FOLDER'], temp_id+'.png')
             post_img.save(post_img_pth)
 
             post_data.img_id = temp_id
+            post_data.contains_img = True
 
         db.session.commit()
         return redirect(url_for('my_profile', current_user=current_user, post_id=post_id))

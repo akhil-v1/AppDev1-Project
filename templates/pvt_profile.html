@@ -32,9 +32,9 @@
             <a href=" /{{current_user_data.username}}/account"
                 style="text-decoration: none; color: white; font-size: medium;">
                 <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
-            <!-- <a href=" /{{current_user_data.username}}/{{current_user}}/profile"
+            <a href=" /{{current_user_data.username}}/{{current_user_data.username}}/profile"
                 style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">Public view |</span></a> -->
+                <span style="font-weight: bold; vertical-align: super;">Public view |</span></a>
             <a href=" /{{current_user_data.username}}" style="text-decoration: none; color: white; font-size: medium;">
                 <span style="font-weight: bold; vertical-align: super;">My Dashboard | </span></a>
             <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
@@ -57,7 +57,7 @@
                 {%else%}
                 <a href="/{{current_user_data.username}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.username}}</a>
-                {%endif}
+                {%endif%}
                 {%endif%}
                 <br>
                 {%endfor%}
@@ -76,7 +76,7 @@
                 {%else%}
                 <a href="/{{current_user_data.username}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.username}}</a>
-                {%endif}
+                {%endif%}
                 {%endif%}
                 <br>
                 {%endfor%}
@@ -99,8 +99,8 @@
                     <br>
                     <span>{{post.caption}}</span>
                     <br>
-                    {% if post.img%}
-                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    {% if post.contains_img%}
+                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}.png" />
                     {%endif%}
                     <br><br>
                     <a href="/{{current_user_data.username}}/{{post.id}}/edit_post">Edit</a> . <a

@@ -18,17 +18,18 @@
                 {{user_profile}}'s Profile |</span> -->
             <span style="vertical-align:super; font-weight: bold; color: white;">
                 {{user_profile_data.followers_count}} Followers | {{user_profile_data.following_count}} Following |
-                {{user_profile_data.posts_count}} Posts |</span>
+                {{user_profile_data.posts_count}} Posts </span>
 
+            {% if user_profile_data.username != current_user%}
             {%if isFollowed%}
             <a href="/{{current_user}}/{{user_profile_data.username}}/unfollow"
                 style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">Unfollow
-                    {{user_profile_data.username}}</span></a>
+                <span style="font-weight: bold; vertical-align: super;">| Unfollow</span></a>
             {%else%}
             <a href="/{{current_user}}/{{user_profile_data.username}}/follow"
                 style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">Follow {{user_profile_data.username}}</span></a>
+                <span style="font-weight: bold; vertical-align: super;">| Follow</span></a>
+            {%endif%}
             {%endif%}
         </div>
         <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
@@ -107,8 +108,8 @@
                     <br>
                     <span>{{post.caption}}</span>
                     <br>
-                    {%if post.img_id%}
-                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}" />
+                    {%if post.contains_img%}
+                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}.png" />
                     {%endif%}
                     <br><br>
                     <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
