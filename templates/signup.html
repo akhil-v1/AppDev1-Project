@@ -8,39 +8,45 @@
 
 <body>
     <div class="top_bar">
-        <div>
-            <span style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+        <div name="app_name" class="app_title_container">
+            <span class="app_title" style="color: yellow">
                 Blog-Lite</span>
-            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+            <span class="app_title">
                 |</span>
-            <span style="vertical-align:super; font-weight: bold; color: white">Sign Up</span>
+            <span class="page_details">Sign Up</span>
         </div>
     </div>
-    <div style="text-align: center;" class="danger">
+    <div class="error_prompt">
         {{ error }}
     </div>
     <br>
-    <div class="login_signup_bar" style="width: fit-content;">
+    <div class="login_signup_bar">
         <form action="/signup" method="post">
-            Create your account<br><br>
-            <input id="fn_id" name="firstname" type="text" class="text" placeholder="First Name" required><br><br>
-            <input id="ln_id" name="lastname" type="text" class="text" placeholder="Last Name" required><br><br>
-            <input id="un_id" name="username" type="text" class="text" placeholder="Username" required><br><br>
-            <input id="em_id" name="email" type="email" class="text" placeholder="Email" required><br><br>
-            <input id="pwd_id" name="password" type="password" class="text" placeholder="Password" required><br><br>
-            <!-- <input id="conf_pwd_id" name="confirm_password" type="password" class="text" placeholder="Confirm Password" required><br><br> -->
-
+            <span style="font-size: larger;">
+                Create your account
+            </span>
+            <br><br><br>
+            <input name="firstname" type="text" class="text" placeholder="First Name" required><br><br>
+            <input name="lastname" type="text" class="text" placeholder="Last Name" required><br><br>
+            <input name="username" type="text" class="text" placeholder="Username" required><br><br>
+            <input name="email" type="email" class="text" placeholder="Email" required><br><br>
+            <input name="password" type="password" class="text" placeholder="Password" required><br><br>
+            <input name="confirm_password" type="password" class="text" placeholder="Confirm Password" required><br><br>
             <button type="submit" class="button">Sign Up</button><br><br>
             <hr style="color: wheat">
             <br>
         </form>
         <div>
-            <a href="/" style="color: white;"><button class="button" style="background-color: rgb(59, 176, 59);">Log
-                    in</button></a>
-        </div><br><br>
+            <a href="/" style="color: white;">
+                <button class="button" style="background-color: blue;">Log in</button>
+            </a>
+        </div>
     </div>
 
-
+    <footer style="text-align:center; color:#999;">
+        &copy; Blog-Lite 1.1. All rights reserved.
+    </footer>
 </body>
+
 
 </html>

@@ -2,42 +2,36 @@ body {
     font-family: Tahoma, sans-serif;
     margin: 0;
     padding: 0;
-    /* background-color: #e9ebee; */
-    background-color: white;
+    background-color: rgb(200, 228, 200);
 }
 
 .top_bar {
     height: 40px;
-    /* background-color: rgb(237, 101, 124); */
-    background-color: rgb(172, 58, 41);
+    background-color: green;
     color: #ebd9d9;
     width: 100%;
-    /* font-size: medium; */
 }
 
-.name {
-    font-size: 40px;
-    padding: 4px;
+.app_title_container {
+    display: inline-block;
+    width: 40%;
+    height: 40px;
 }
 
-.top_bar_button {
-    background-color: #3bdb22;
-    width: 70px;
-    text-align: center;
-    padding: 4px;
-    float: right;
+.app_title {
+    color: white;
+    font-family: Tahoma;
+    font-size: 30px;
+    margin-left: 0.5%;
+    height: 100%;
 }
 
-.login_signup_bar {
-    background-color: white;
-    width: 800px;
-    margin: auto;
-    margin-top: '50px';
-    padding: 10px;
-    padding-top: 10px;
-    text-align: center;
+.page_details {
+    color: white;
+    vertical-align: super;
     font-weight: bold;
 }
+
 
 .text {
     height: 40px;
@@ -46,76 +40,7 @@ body {
     font-size: 14px;
 }
 
-.button {
-    width: 300px;
-    height: 40px;
-    font-weight: bold;
-    background-color: rgb(219, 101, 83);
-    color: white;
-}
-
-.red_bar {
-    height: 20%;
-    background-color: rgb(172, 58, 41);
-    color: #ebd9d9;
-}
-
-.red_bar_text {
-    height: 100%;
-    margin-left: 0.5%;
-    width: 100%;
-    margin-right: 0.5%;
-    /* margin: auto; */
-    font-size: 200%;
-}
-
-.search_box {
-    width: auto;
-    height: auto;
-    font-size: 20px;
-    /* background-image: url(/static/images/search.png); */
-    /* background-repeat: no-repeat;
-    background-position: right; */
-
-}
-
-.content {
-    width: 800px;
-    margin: auto;
-    min-height: 400px;
-}
-
-.content_text {
-    background-color: white;
-    text-align: center;
-    color: #ca5555;
-    font-size: 35px;
-}
-
-.profile_pic {
-    width: 150px;
-    margin-top: -200px;
-    border-radius: 50%;
-    border: solid 2px white;
-}
-
-.menu_buttons {
-    width: 100px;
-    display: inline-block;
-    margin: 2px;
-    font-size: 15px;
-
-}
-
-.post_area {
-    border: solid thin #ebd9d9;
-    /* padding: 10px; */
-    width: 100%;
-    margin-top: 10px;
-}
-
 textarea {
-    /* width: 100%; */
     border: none;
     font-family: tahoma;
     font-size: 20px;
@@ -125,28 +50,102 @@ textarea {
     margin-right: 10px;
 }
 
-.friends_bar {
-    background-color: white;
-    /* min-height: 400px; */
-    margin-top: 20px;
-    height: 30%;
-    color: #aaa;
-    padding: 8px;
-    text-align: left;
-    overflow: scroll;
+.search_bar_container {
+    display: inline-block;
+    width: 25%;
+    height: 40px;
+    vertical-align: top;
 }
 
-.friends {
-    clear: both;
-    color: #ca5555;
-    font-size: 12px;
+.search_box {
+    width: auto;
+    height: auto;
+    font-size: 20px;
+
+}
+
+.options_container {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+}
+
+.options_link {
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+}
+
+.options_text {
     font-weight: bold;
+    vertical-align: super;
 }
 
-.posts_bar {
-    margin-top: 20px;
+.error_prompt {
+    text-align: center;
+}
+
+.login_signup_bar {
     background-color: white;
+    width: fit-content;
+    margin: auto;
+    margin-top: '50px';
+    padding: 10px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    height: fit-content;
+}
+
+.left_container {
     margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 20px;
+    width: 25%;
+}
+
+.right_container {
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 20px;
+    width: 75%;
+}
+
+.content_header {
+    background-color: rgb(200, 228, 200);
+    color: #ca5555;
+    font-size: 35px;
+    border: none;
+    text-align: left;
+}
+
+.new_post {
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.post_title_input {
+    border: soft;
+    height: 30px;
+    width: 100%;
+    font-weight: bold;
+    resize: none
+}
+
+.post_content_input {
+    border: soft;
+    height: 400px;
+    overflow: scroll;
+    margin-top: 5px;
+    width: 100%;
+    text-align: left;
+    resize: none;
+}
+
+.feed {
+    background-color: white;
+    margin-top: 15px;
     padding: 10px;
 }
 
@@ -155,9 +154,50 @@ textarea {
     font-size: 13px;
 }
 
-.profile_headers {
-    font-size: 25px;
+.post_title {
     color: #ca5555;
+    font-weight: bold;
+}
+
+.post_img {
+    max-width: 100%;
+    margin-top: 5px;
+}
+
+.following_followers {
+    color: #ca5555;
+    font-size: 25px;
     text-align: left;
     margin-top: 10px;
+}
+
+.friends_bar {
+    background-color: white;
+    margin-top: 15px;
+    height: 250px;
+    color: #aaa;
+    padding: 8px;
+    text-align: left;
+    overflow: scroll;
+}
+
+.friends {
+    color: blue;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.edit_post_container {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    width: 75%;
+}
+
+.button {
+    background-color: green;
+    color: white;
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
 }

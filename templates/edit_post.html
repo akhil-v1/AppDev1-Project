@@ -6,16 +6,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 </head>
 
-<body style="background-color:#ebd9d9;">
+<body>
 
     <div class="top_bar">
-        <div id="app_name" style="display: inline-block; width: 40%; height: 40px;">
-            <span
-                style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">Blog-Lite</span>
-            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">|</span>
-            <span style="vertical-align:super; font-weight: bold; color: white;">Edit Post</span>
+        <div name="app_name" class="app_title_container">
+            <span class="app_title" style="color: yellow">Blog-Lite</span>
+            <span class="app_title">|</span>
+            <span class="page_details">Edit Post</span>
         </div>
-        <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
+        <div name="search_bar" class="search_bar_container">
             <span>
                 <form action="/{{current_user_data.username}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
@@ -25,33 +24,33 @@
                 </form>
             </span>
         </div>
-        <div id="options" style="display: inline-block; width: 30%; text-align: right;">
-            <a href=" /{{current_user_data.username}}/account"
-                style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
-            <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
-                    style="font-weight: bold; vertical-align: super;">Logout</span></a>
+        <div id="options" class="options_container">
+            <a href=" /{{current_user_data.username}}/account" class="options_link">
+                <span class="options_text">My Profile | </span></a>
+            <a href=" /{{current_user_data.username}}" class="options_link">
+                <span class="options_text">My Dashboard | </span></a>
+            <a href="/" class="options_link"><span class="options_text">Logout</span></a>
         </div>
     </div>
 
     <div style="display: flex;">
 
-        <div id="edit_post" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
-            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
+        <div name="edit_post" class="edit_post_container">
+            <div class="content_header">
                 Edit your post
             </div>
-            <div class="post_area">
+            <div class="new_post">
                 <form action="/{{current_user_data.username}}/{{post_data.id}}/edit_post" method="post"
                     enctype="multipart/form-data">
-                    <input style="border: soft;height: 30px; width: 100%;" type="text" name="post_title"
-                        value={{post_data.name}} required>
+
+                    <textarea class="post_title_input" type="text" name="post_title"
+                        required>{{post_data.name}}</textarea>
                     <br>
-                    <input
-                        style="border: soft;height: 100px; overflow: scroll; margin-top: 5px; width: 100%; text-align: left; vertical-align: text-top;"
-                        type="text" name="post_des" value={{post_data.caption}} required>
+                    <textarea class="post_content_input" type="text" name="post_des"
+                        required>{{post_data.caption}}</textarea>
                     <br>
-                    {%if post_data.img%}
-                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post_data.img_id}}" />
+                    {%if post_data.contains_img%}
+                    <img class="post_img" src="/static/uploads/{{post_data.img_id}}.png" />
                     {%endif%}
                     <span>Upload: <input name="post_img" type="file" style="margin-top: 10px;"></span>
                     <br>
@@ -63,6 +62,10 @@
         </div>
     </div>
 
+
+    <footer style="text-align:center; color:#999;">
+        &copy; Blog-Lite 1.1. All rights reserved.
+    </footer>
 
 
 </body>

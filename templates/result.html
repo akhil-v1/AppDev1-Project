@@ -6,16 +6,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 </head>
 
-<body style="background-color:#ebd9d9;">
+<body>
 
     <div class="top_bar">
-        <div id="app_name" style="display: inline-block; width: 40%; height: 40px;">
-            <span
-                style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">Blog-Lite</span>
-            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">|</span>
-            <span style="vertical-align:super; font-weight: bold; color: white;">My dashboard</span>
+        <div name="app_name" class="app_title_container">
+            <span class="app_title">Blog-Lite</span>
+            <span class="app_title">|</span>
+            <span class="page_details">My dashboard</span>
         </div>
-        <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
+        <div id="search_bar" class="search_bar_container">
             <span>
                 <form action="/{{current_user}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
@@ -25,26 +24,26 @@
                 </form>
             </span>
         </div>
-        <div id="options" style="display: inline-block; width: 30%; text-align: right;">
-            <a href=" /{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
-            <a href=" /{{current_user}}" style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Dashboard | </span></a>
-            <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
-                    style="font-weight: bold; vertical-align: super;">Logout</span></a>
+        <div id="options" class="options_container">
+            <a href=" /{{current_user}}/account" class="options_link">
+                <span class="options_text">My Profile | </span></a>
+            <a href=" /{{current_user}}" class="options_link">
+                <span class="options_text">My Dashboard | </span></a>
+            <a href="/" class="options_link">
+                <span class="options_text">Logout</span></a>
         </div>
     </div>
 
     <div style="display: flex;">
 
-        <div id="user_feed" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 100%;">
+        <div name="user_feed" class="edit_post_container">
             {%if isData%}
-            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
+            <div class="content_header">
                 Search results for {{user_query}}
             </div>
-            <div class="posts_bar">
-                <div class="post">
-                    <div style="color: #ca5555;font-weight: bold;">
+            <div class="feed">
+                <div class="new_post">
+                    <div class="post_title">
                         {% for user_data in user_query_data %}
                         {% if user_data.username == current_user%}
                         <a href="/{{current_user}}/account"
@@ -61,13 +60,17 @@
                 </div>
             </div>
             {%else%}
-            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
+            <div class="content_header">
                 No results for {{user_query}}
             </div>
             {%endif%}
         </div>
     </div>
 
+
+    <footer style="text-align:center; color:#999;">
+        &copy; Blog-Lite 1.1. All rights reserved.
+    </footer>
 
 
 </body>

@@ -7,32 +7,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 </head>
 
-<body style="background-color:#ebd9d9;">
+<body>
     <div class="top_bar">
-        <div id="app_name" style="display: inline-block; width: 40%; height: 40px;">
-            <span style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
-                Blog-Lite</span>
-            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
-                |</span>
+        <div name="app_name" class="app_title_container">
+            <span class="app_title">Blog-Lite</span>
+            <span class="app_title">|</span>
             <!-- <span style="vertical-align:super; font-weight: bold; color: white;">
                 {{user_profile}}'s Profile |</span> -->
-            <span style="vertical-align:super; font-weight: bold; color: white;">
-                {{user_profile_data.followers_count}} Followers | {{user_profile_data.following_count}} Following |
-                {{user_profile_data.posts_count}} Posts </span>
+            <span class="page_details">{{user_profile_data.followers_count}} Followers |
+                {{user_profile_data.following_count}} Following | {{user_profile_data.posts_count}} Posts </span>
 
             {% if user_profile_data.username != current_user%}
             {%if isFollowed%}
-            <a href="/{{current_user}}/{{user_profile_data.username}}/unfollow"
-                style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">| Unfollow</span></a>
+            <a href="/{{current_user}}/{{user_profile_data.username}}/unfollow" style="text-decoration: none;">
+                <span class="page_details">| Unfollow</span></a>
             {%else%}
-            <a href="/{{current_user}}/{{user_profile_data.username}}/follow"
-                style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">| Follow</span></a>
+            <a href="/{{current_user}}/{{user_profile_data.username}}/follow" style="text-decoration: none;">
+                <span class="page_details">| Follow</span></a>
             {%endif%}
+            {%else%}
+            <a href="/{{current_user}}/account" style="text-decoration: none;">
+                <span class="page_details">| Close</span></a>
             {%endif%}
         </div>
-        <div id="search_bar" style="display: inline-block; width: 25%; height: 40px; vertical-align: top;">
+        <div id="search_bar" class="search_bar_container">
             <span>
                 <form action="/{{current_user}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
@@ -42,19 +40,22 @@
                 </form>
             </span>
         </div>
-        <div id="options" style="display: inline-block; width: 30%; text-align: right;">
-            <a href=" /{{current_user}}/account" style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Profile | </span></a>
-            <a href=" /{{current_user}}" style="text-decoration: none; color: white; font-size: medium;">
-                <span style="font-weight: bold; vertical-align: super;">My Dashboard | </span></a>
-            <a href="/" style="text-decoration: none; color: white;font-size: medium;"><span
-                    style="font-weight: bold; vertical-align: super;">Logout</span></a>
+        <div id="options" class="options_container">
+            <a href=" /{{current_user}}/account" class="options_link">
+                <span class="options_text">My Profile | </span>
+            </a>
+            <a href=" /{{current_user}}" class="options_link">
+                <span class="options_text">My Dashboard | </span>
+            </a>
+            <a href="/" class="options_link">
+                <span class="options_text">Logout</span>
+            </a>
         </div>
     </div>
 
     <div style="display: flex;">
-        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 25%;">
-            <div class="profile_headers">
+        <div class="left_container">
+            <div class="following_followers">
                 Followed by
             </div>
             <div class="friends_bar">
@@ -62,17 +63,19 @@
                 {%for user in users_data%}
                 {% if (user.id|string in user_profile_data.followers.split('_'))%}
                 {%if user.username == current_user%}
-                <a href="/{{current_user}}/account" class="friends"
-                    style="text-decoration: none;">{{user.username}}</a><br>
+                <a href="/{{current_user}}/account" class="friends" style="text-decoration: none;">{{user.first_name}}
+                    {{user.last_name}} ({{user.username}})</a>
                 {%else%}
                 <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
-                    style="text-decoration: none;">{{user.username}}</a><br>
+                    style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
+                <br>
                 {%endif%}
                 {%endfor%}
                 {%endif%}
             </div>
-            <div class="profile_headers">
+            <br><br>
+            <div class="following_followers">
                 Following
             </div>
             <div class="friends_bar">
@@ -80,36 +83,44 @@
                 {%for user in users_data%}
                 {%if (user.id|string in user_profile_data.following.split('_'))%}
                 {%if user.username == current_user%}
-                <a href="/{{current_user}}/account" class="friends"
-                    style="text-decoration: none;">{{user.username}}</a><br>
+                <a href="/{{current_user}}/account" class="friends" style="text-decoration: none;">{{user.first_name}}
+                    {{user.last_name}} ({{user.username}})</a>
                 {%else%}
                 <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
-                    style="text-decoration: none;">{{user.username}}</a><br>
+                    style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
-                </a><br>
+                <br>
                 {%endif%}
                 {%endfor%}
                 {%endif%}
             </div>
         </div>
 
-        <div style="margin-left: 20px; margin-right: 20px; margin-top: 20px; width: 75%;">
-            <div style="border: none;background-color: #ebd9d9; text-align: left; " class="content_text">
+        <div class="right_container">
+            <div class="content_header">
                 {{user_profile_data.username}}'s activity
             </div>
             {% for post in user_profile_posts %}
-            <div class="posts_bar">
+            <div class="feed">
                 <div class="post">
-                    <div style="color: #ca5555;font-weight: bold;">
-                        <a href="/{{current_user}}/{{user_profile_data.username}}/profile"
-                            style="text-decoration: none; color: blue;">{{user_profile_data.usernmae}}</a>
+                    <div class="post_title">
+                        {% if post.creator == current_user %}
+                        <a href="/{{current_user}}/account" style="text-decoration: none; color: blue;">
+                            {{post.creator}}
+                        </a>
+                        {%else%}
+                        <a href="/{{current_user}}/{{post.creator}}/profile"
+                            style="text-decoration: none; color: blue;">
+                            {{post.creator}}
+                        </a>
+                        {%endif%}
                         > {{post.name}}
                     </div>
                     <br>
                     <span>{{post.caption}}</span>
                     <br>
                     {%if post.contains_img%}
-                    <img style="max-width: 100%; margin-top: 5px;" src="/static/uploads/{{post.img_id}}.png" />
+                    <img class="post_img" src="/static/uploads/{{post.img_id}}.png" />
                     {%endif%}
                     <br><br>
                     <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
@@ -119,6 +130,11 @@
             {%endfor%}
         </div>
     </div>
+
+    <footer style="text-align:center; color:#999;">
+        &copy; Blog-Lite 1.1. All rights reserved.
+    </footer>
+
 </body>
 
 </html>

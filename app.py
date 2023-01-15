@@ -34,13 +34,12 @@ def home():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
-        firstname, lastname, email, password, username = request.form['firstname'], request.form[
-            'lastname'], request.form['email'], request.form['password'], request.form['username']
-        # confirm_pwd = request.form['confirm_password']
+        firstname, lastname, email, password, username, confirm_pwd = request.form['firstname'], request.form[
+            'lastname'], request.form['email'], request.form['password'], request.form['username'], request.form['confirm_password']
 
-        # if password != confirm_pwd:
-        #     error = 'Passwords do not match'
-        #     return render_template('signup.html', error=error)
+        if password != confirm_pwd:
+            error = 'Passwords do not match'
+            return render_template('signup.html', error=error)
 
         # if len(password) < 8:
         #     error='Password should contain 8 or more characters'
@@ -66,7 +65,7 @@ def signup():
             error = 'Email already registered.'
             return render_template('signup.html', error=error)
 
-        new_user = User(first_name=firstname, last_name=lastname, username=username,
+        new_user = User(first_name=firstname[0].upper() + firstname[1:], last_name=lastname[0].upper() + lastname[1:], username=username,
                         email=email, pwd=password, followers_count=0, following_count=0, posts_count=0)
 
         db.session.add(new_user)
@@ -102,6 +101,9 @@ def login():
 
 @app.route('/<string:current_user>', methods=['POST', 'GET'])
 def dashboard(current_user):
+    '''
+    current_user: Logged in user
+    '''
     if request.method == 'GET':
         current_user_data = User.query.filter_by(username=current_user).first()
         posts = []
@@ -146,6 +148,9 @@ def dashboard(current_user):
 
 @app.route('/<string:current_user>/search', methods=['POST'])
 def search(current_user):
+    '''
+    current_user: Logged in user
+    '''
     if request.form['user_query']:
         return redirect(url_for('search_user', current_user=current_user, user_query=request.form['user_query']))
     else:
@@ -154,6 +159,10 @@ def search(current_user):
 
 @app.route('/<string:current_user>/search?name=<string:user_query>', methods=['GET'])
 def search_user(current_user, user_query):
+    '''
+    current_user: Logged in user
+    user_profile: search query
+    '''
     user_query_data = db.session.query(User).filter(or_(User.email.like('%' + str(user_query.split('@')) + '%'), User.username.like(
         f'%{user_query}%'), User.first_name.like(f'%{user_query}%'), User.last_name.like('%' + str(user_query) + '%'))).all()
     return render_template('result.html', user_query=user_query, user_query_data=user_query_data, current_user=current_user, isData=True if user_query_data else False)
@@ -161,6 +170,10 @@ def search_user(current_user, user_query):
 
 @app.route('/<string:current_user>/<string:user_profile>/profile', methods=['GET'])
 def user_profile(current_user, user_profile):
+    '''
+    current_user: Logged in user
+    user_profile: user whose public profile is being displayed
+    '''
     isFollowed = False
     current_user_data = User.query.filter_by(username=current_user).first()
     user_profile_data = User.query.filter_by(username=user_profile).first()
@@ -187,6 +200,9 @@ def user_profile(current_user, user_profile):
 
 @app.route('/<string:current_user>/account', methods=['GET'])
 def my_profile(current_user):
+    '''
+    current_user: Logged in user
+    '''
     current_user_data = User.query.filter_by(username=current_user).first()
 
     users_data = User.query.all()
@@ -203,6 +219,10 @@ def my_profile(current_user):
 
 @app.route('/<string:current_user>/<string:user_profile>/follow', methods=['GET'])
 def follow(current_user, user_profile):
+    '''
+    current_user: Logged in user
+    user_profile: user to be followed/unfollowed
+    '''
     current_user_data = User.query.filter_by(username=current_user).first()
     user_profile_data = User.query.filter_by(username=user_profile).first()
 
@@ -224,6 +244,10 @@ def follow(current_user, user_profile):
 
 @app.route('/<string:current_user>/<string:user_profile>/unfollow', methods=['GET'])
 def unfollow(current_user, user_profile):
+    '''
+    current_user: Logged in user
+    user_profile: user to be followed/unfollowed
+    '''
     current_user_data = User.query.filter_by(username=current_user).first()
     user_profile_data = User.query.filter_by(username=user_profile).first()
 
@@ -249,6 +273,10 @@ def unfollow(current_user, user_profile):
 
 @app.route('/<string:current_user>/<int:post_id>/edit_post', methods=['GET', 'POST'])
 def edit_post(current_user, post_id):
+    '''
+    current_user: Logged in user
+    post_id: post to be edited
+    '''
     if request.method == 'GET':
         current_user_data = User.query.filter_by(username=current_user).first()
         post_data = Post.query.filter_by(id=post_id).first()
@@ -281,6 +309,10 @@ def edit_post(current_user, post_id):
 
 @app.route('/<string:current_user>/<int:post_id>/delete_post', methods=['GET'])
 def delete_post(current_user, post_id):
+    '''
+    current_user: Logged in user
+    post_id: post to be deleted
+    '''
     user_data = User.query.filter_by(username=current_user).first()
     post = Post.query.filter_by(id=post_id).first()
     db.session.delete(post)

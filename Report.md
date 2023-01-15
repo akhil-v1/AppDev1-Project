@@ -28,7 +28,7 @@ In this project, I have designed a **blogging application**. It is a multiple us
 
 - **Relation**- A user can have many posts and thus we have one-to-many relationship between **User** and **Post**. A secondary table- **UserPosts** is used to establish one-to-many relationship with User and Post.
 
-***Organisation of project code:***
+***Architecture and Features:***
 
 The project code is organised based on its utility in different files and directories. I have named the root directory of my project as **Blog_Lite**. Inside this directory there is a python file **app.py**; **Blog_Lite/static** containing all the files required  for the application; **Blog_Lite/templates** contains all the HTML (Jinja) files; **Blog_Lite/report** containing the pdf report file(a short description of the application) and; **Blog_Lite/Database** containing a python file **module.py** (used to develop the databases). The following are the html pages used in the application: login, signup, result, dashboard, pub_profile,pvt_profile and edit_post.
 
@@ -47,3 +47,5 @@ The project code is organised based on its utility in different files and direct
 - @app.route('/<string:current_user>/<string:user_profile>/unfollow', methods=['GET'])
 - @app.route('/<string:current_user>/<int:post_id>/edit_post', methods=['GET', 'POST'])
 - @app.route('/<string:current_user>/<int:post_id>/delete_post', methods=['GET'])
+
+***Video***

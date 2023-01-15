@@ -8,59 +8,44 @@
 
 <body>
     <div class="top_bar">
-
-        <div>
-            <span style="color: yellow; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+        <div name="app_name" class="app_title_container">
+            <span class="app_title" style="color: yellow">
                 Blog-Lite</span>
-            <span style="color: white; font-family: Tahoma; font-size: 30px; margin-left: 0.5%; height: 100%;">
+            <span class="app_title">
                 |</span>
-            <span style="vertical-align:super; font-weight: bold; color: white">Log in</span>
+            <span class="page_details">Log in</span>
         </div>
-
     </div>
     </div>
     <br>
-    <div style="text-align: center;" class="danger">
+    <div class="error_prompt">
         {{ error }}
     </div>
 
     <div class="login_signup_bar" style="width: fit-content;">
         <form action="/login" method="post">
-            Login to Blog-Lite<br><br>
+            <span style="font-size: larger;">
+                Log in to Blog-Lite
+            </span>
+            <br><br><br>
             <input name="user_id" type="text" class="text" placeholder="Email or Username"><br><br>
-            <input name="password" type="password" class="text" placeholder="Password"><br><br>
+            <input name="password" type="password" class="text" placeholder="Password"><br><br><br>
             <button type="submit" class="button">Login</button><br><br>
             <hr style="color: wheat">
             <br>
         </form>
         <div>
-            <a href="/signup" style="color: white;"><button class="button"
-                    style="background-color: rgb(59, 176, 59);">Create new
-                    account</button></a>
-        </div><br><br>
+            <a href="/signup" style="color: white;">
+                <button class="button" style="background-color: blue;">Create new account</button>
+            </a>
+        </div>
     </div>
 
+
+    <footer style="text-align:center; color:#999;">
+        &copy; Blog-Lite 1.1. All rights reserved.
+    </footer>
 
 </body>
 
 </html>
-<!-- <html>
-
-<head>
-    <title>Welcome To Blog-Lite!!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
-</head>
-
-<body>
-    <div class="top_bar">
-        <div style="text-align: left;font-size: 50px;">Blog-Lite!!</div>
-    </div>
-    <div style="text-align: center; font-size: 100px;">
-        <a href="/signup"><button type="button" class="button">Sign-Up</button> </a>
-        <br>
-        <a href="/login"><button type="button" class="button">Log-In</button> </a>
-
-    </div>
-</body>
-
-</html> -->
