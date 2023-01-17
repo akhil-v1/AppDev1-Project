@@ -10,7 +10,7 @@ from sqlalchemy import or_
 from Database.model import *
 
 # path for saving user post images
-UPLOAD_FOLDER = '/Users/akhil/Documents/AppDev1-Project/static/uploads'
+UPLOAD_FOLDER = './static/uploads'
 
 app = Flask(__name__)
 
@@ -87,7 +87,8 @@ def login():
         if user_data:
             if password == user_data.pwd:
                 username = user_data.username
-                return redirect(f"/{username}")
+                print('Hi', username)
+                return redirect(f"/user_id={username}")
             else:
                 error = "Incorrect password"
                 return render_template('login.html', error=error)
@@ -99,7 +100,7 @@ def login():
         return render_template('login.html', error='')
 
 
-@app.route('/<string:current_user>', methods=['POST', 'GET'])
+@app.route('/user_id=<string:current_user>', methods=['POST', 'GET'])
 def dashboard(current_user):
     '''
     current_user: Logged in user
@@ -107,6 +108,7 @@ def dashboard(current_user):
     if request.method == 'GET':
         current_user_data = User.query.filter_by(username=current_user).first()
         posts = []
+        print('Hello')
         if current_user_data.following:
             followedIDs = current_user_data.following.split('_')
 
@@ -146,7 +148,7 @@ def dashboard(current_user):
         return redirect(url_for('dashboard', current_user=current_user))
 
 
-@app.route('/<string:current_user>/search', methods=['POST'])
+@app.route('/user_id=<string:current_user>/search', methods=['POST'])
 def search(current_user):
     '''
     current_user: Logged in user
@@ -157,7 +159,7 @@ def search(current_user):
         return redirect(url_for('search_user', current_user=current_user, user_query=' '))
 
 
-@app.route('/<string:current_user>/search?name=<string:user_query>', methods=['GET'])
+@app.route('/user_id=<string:current_user>/search?name=<string:user_query>', methods=['GET'])
 def search_user(current_user, user_query):
     '''
     current_user: Logged in user
@@ -168,7 +170,7 @@ def search_user(current_user, user_query):
     return render_template('result.html', user_query=user_query, user_query_data=user_query_data, current_user=current_user, isData=True if user_query_data else False)
 
 
-@app.route('/<string:current_user>/<string:user_profile>/profile', methods=['GET'])
+@app.route('/user_id=<string:current_user>/<string:user_profile>/profile', methods=['GET'])
 def user_profile(current_user, user_profile):
     '''
     current_user: Logged in user
@@ -198,7 +200,7 @@ def user_profile(current_user, user_profile):
     return render_template('pub_profile.html', current_user=current_user, users_data=users_data, user_profile_data=user_profile_data, user_profile_posts=sorted(user_profile_posts, key=lambda x: x.timestamp, reverse=True), isFollowed=isFollowed)
 
 
-@app.route('/<string:current_user>/account', methods=['GET'])
+@app.route('/user_id=<string:current_user>/account', methods=['GET'])
 def my_profile(current_user):
     '''
     current_user: Logged in user
@@ -217,7 +219,7 @@ def my_profile(current_user):
     return render_template('pvt_profile.html', current_user_data=current_user_data, users_data=users_data, my_posts=sorted(my_posts, key=lambda x: x.timestamp, reverse=True))
 
 
-@app.route('/<string:current_user>/<string:user_profile>/follow', methods=['GET'])
+@app.route('/user_id=<string:current_user>/<string:user_profile>/follow', methods=['GET'])
 def follow(current_user, user_profile):
     '''
     current_user: Logged in user
@@ -242,7 +244,7 @@ def follow(current_user, user_profile):
     return redirect(url_for('user_profile', current_user=current_user, user_profile=user_profile))
 
 
-@app.route('/<string:current_user>/<string:user_profile>/unfollow', methods=['GET'])
+@app.route('/user_id=<string:current_user>/<string:user_profile>/unfollow', methods=['GET'])
 def unfollow(current_user, user_profile):
     '''
     current_user: Logged in user
@@ -271,7 +273,7 @@ def unfollow(current_user, user_profile):
     return redirect(url_for('user_profile', current_user=current_user, user_profile=user_profile))
 
 
-@app.route('/<string:current_user>/<int:post_id>/edit_post', methods=['GET', 'POST'])
+@app.route('/user_id=<string:current_user>/<int:post_id>/edit_post', methods=['GET', 'POST'])
 def edit_post(current_user, post_id):
     '''
     current_user: Logged in user
@@ -307,7 +309,7 @@ def edit_post(current_user, post_id):
         return redirect(url_for('my_profile', current_user=current_user, post_id=post_id))
 
 
-@app.route('/<string:current_user>/<int:post_id>/delete_post', methods=['GET'])
+@app.route('/user_id=<string:current_user>/<int:post_id>/delete_post', methods=['GET'])
 def delete_post(current_user, post_id):
     '''
     current_user: Logged in user
@@ -315,6 +317,10 @@ def delete_post(current_user, post_id):
     '''
     user_data = User.query.filter_by(username=current_user).first()
     post = Post.query.filter_by(id=post_id).first()
+    temp_id = post.img_id
+    if post.contains_img:
+        os.remove(os.path.join(
+            app.config['UPLOAD_FOLDER'], temp_id+'.png'))
     db.session.delete(post)
     user_data.posts_count -= 1
     db.session.commit()
@@ -322,4 +328,4 @@ def delete_post(current_user, post_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

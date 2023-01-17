@@ -10,7 +10,7 @@
 <body>
     <div class="top_bar">
         <div name="app_name" class="app_title_container">
-            <span class="app_title">Blog-Lite</span>
+            <span class="app_title" style="color: yellow">Blog-Lite</span>
             <span class="app_title">|</span>
             <!-- <span style="vertical-align:super; font-weight: bold; color: white;">
                 {{user_profile}}'s Profile |</span> -->
@@ -19,20 +19,20 @@
 
             {% if user_profile_data.username != current_user%}
             {%if isFollowed%}
-            <a href="/{{current_user}}/{{user_profile_data.username}}/unfollow" style="text-decoration: none;">
+            <a href="/user_id={{current_user}}/{{user_profile_data.username}}/unfollow" style="text-decoration: none;">
                 <span class="page_details">| Unfollow</span></a>
             {%else%}
-            <a href="/{{current_user}}/{{user_profile_data.username}}/follow" style="text-decoration: none;">
+            <a href="/user_id={{current_user}}/{{user_profile_data.username}}/follow" style="text-decoration: none;">
                 <span class="page_details">| Follow</span></a>
             {%endif%}
             {%else%}
-            <a href="/{{current_user}}/account" style="text-decoration: none;">
+            <a href="/user_id={{current_user}}/account" style="text-decoration: none;">
                 <span class="page_details">| Close</span></a>
             {%endif%}
         </div>
         <div id="search_bar" class="search_bar_container">
             <span>
-                <form action="/{{current_user}}/search" method="post">
+                <form action="/user_id={{current_user}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
                         <input name='user_query' type="text" class="search_box" placeholder="Find people...">
                         <button type="submit"><img src="/static/images/search.png"></button>
@@ -41,10 +41,10 @@
             </span>
         </div>
         <div id="options" class="options_container">
-            <a href=" /{{current_user}}/account" class="options_link">
+            <a href=" /user_id={{current_user}}/account" class="options_link">
                 <span class="options_text">My Profile | </span>
             </a>
-            <a href=" /{{current_user}}" class="options_link">
+            <a href=" /user_id={{current_user}}" class="options_link">
                 <span class="options_text">My Dashboard | </span>
             </a>
             <a href="/" class="options_link">
@@ -63,10 +63,11 @@
                 {%for user in users_data%}
                 {% if (user.id|string in user_profile_data.followers.split('_'))%}
                 {%if user.username == current_user%}
-                <a href="/{{current_user}}/account" class="friends" style="text-decoration: none;">{{user.first_name}}
+                <a href="/user_id={{current_user}}/account" class="friends"
+                    style="text-decoration: none;">{{user.first_name}}
                     {{user.last_name}} ({{user.username}})</a>
                 {%else%}
-                <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
+                <a href="/user_id={{current_user}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
                 <br>
@@ -83,10 +84,11 @@
                 {%for user in users_data%}
                 {%if (user.id|string in user_profile_data.following.split('_'))%}
                 {%if user.username == current_user%}
-                <a href="/{{current_user}}/account" class="friends" style="text-decoration: none;">{{user.first_name}}
+                <a href="/user_id={{current_user}}/account" class="friends"
+                    style="text-decoration: none;">{{user.first_name}}
                     {{user.last_name}} ({{user.username}})</a>
                 {%else%}
-                <a href="/{{current_user}}/{{user.username}}/profile" class="friends"
+                <a href="/user_id={{current_user}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
                 <br>
@@ -98,20 +100,20 @@
 
         <div class="right_container">
             <div class="content_header">
-                {{user_profile_data.username}}'s activity
+                {{user_profile_data.first_name}}'s activity
             </div>
             {% for post in user_profile_posts %}
             <div class="feed">
                 <div class="post">
                     <div class="post_title">
                         {% if post.creator == current_user %}
-                        <a href="/{{current_user}}/account" style="text-decoration: none; color: blue;">
-                            {{post.creator}}
+                        <a href="/user_id={{current_user}}/account" style="text-decoration: none; color: blue;">
+                            {{user_profile_data.first_name}} {{user_profile_data.last_name}} ({{post.creator}})
                         </a>
                         {%else%}
-                        <a href="/{{current_user}}/{{post.creator}}/profile"
+                        <a href="/user_id={{current_user}}/{{post.creator}}/profile"
                             style="text-decoration: none; color: blue;">
-                            {{post.creator}}
+                            {{user_profile_data.first_name}} {{user_profile_data.last_name}} ({{post.creator}})
                         </a>
                         {%endif%}
                         > {{post.name}}

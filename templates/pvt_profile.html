@@ -19,7 +19,7 @@
         </div>
         <div name="search_bar" class="search_bar_container">
             <span>
-                <form action="/{{current_user_data.username}}/search" method="post">
+                <form action="/user_id={{current_user_data.username}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
                         <input name='user_query' type="text" class="search_box" placeholder="Find people...">
                         <button type="submit"><img src="/static/images/search.png"></button>
@@ -28,13 +28,14 @@
             </span>
         </div>
         <div name="options" class="options_container">
-            <a href=" /{{current_user_data.username}}/account" class="options_link">
+            <a href=" /user_id={{current_user_data.username}}/account" class="options_link">
                 <span class="options_text">My Profile | </span>
             </a>
-            <a href=" /{{current_user_data.username}}/{{current_user_data.username}}/profile" class="options_link">
+            <a href=" /user_id={{current_user_data.username}}/{{current_user_data.username}}/profile"
+                class="options_link">
                 <span class="options_text">Public view |</span>
             </a>
-            <a href=" /{{current_user_data.username}}" class="options_link">
+            <a href=" /user_id={{current_user_data.username}}" class="options_link">
                 <span class="options_text">My Dashboard | </span>
             </a>
             <a href="/" class="options_link">
@@ -53,10 +54,10 @@
                 {%for user in users_data%}
                 {% if (user.id|string in current_user_data.followers.split('_'))%}
                 {%if user.username == current_user_data.username%}
-                <a href="/{{current_user_data.username}}/account" class="friends"
+                <a href="/user_id={{current_user_data.username}}/account" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%else%}
-                <a href="/{{current_user_data.username}}/{{user.username}}/profile" class="friends"
+                <a href="/user_id={{current_user_data.username}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
                 <br>
@@ -73,10 +74,10 @@
                 {%for user in users_data%}
                 {%if user.id|string in current_user_data.following.split('_')%}
                 {%if user.username == current_user_data.username%}
-                <a href="/{{current_user_data.username}}/account" class="friends"
+                <a href="/user_id={{current_user_data.username}}/account" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%else%}
-                <a href="/{{current_user_data.username}}/{{user.username}}/profile" class="friends"
+                <a href="/user_id={{current_user_data.username}}/{{user.username}}/profile" class="friends"
                     style="text-decoration: none;">{{user.first_name}} {{user.last_name}} ({{user.username}})</a>
                 {%endif%}
                 <br>
@@ -94,8 +95,9 @@
             <div class="feed">
                 <div class="post">
                     <div class="post_title">
-                        <a href="/{{current_user_data.username}}/account" style="text-decoration: none; color: blue;">
-                            {{post.creator}}
+                        <a href="/user_id={{current_user_data.username}}/account"
+                            style="text-decoration: none; color: blue;">
+                            {{current_user_data.first_name}} {{current_user_data.last_name}} ({{post.creator}})
                         </a>
                         > {{post.name}}
                     </div>
@@ -106,8 +108,8 @@
                     <img class="post_img" src="/static/uploads/{{post.img_id}}.png" />
                     {%endif%}
                     <br><br>
-                    <a href="/{{current_user_data.username}}/{{post.id}}/edit_post">Edit</a> . <a
-                        href="/{{current_user_data.username}}/{{post.id}}/delete_post">Delete</a> .
+                    <a href="/user_id={{current_user_data.username}}/{{post.id}}/edit_post">Edit</a> . <a
+                        href="/user_id={{current_user_data.username}}/{{post.id}}/delete_post">Delete</a> .
                     <span style="color: #999;">{{post.timestamp.strftime("%Y-%m-%d %H:%M:%S")}}</span>
                 </div>
                 <br>

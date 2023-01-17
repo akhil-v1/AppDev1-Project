@@ -16,7 +16,7 @@
         </div>
         <div name="search_bar" class="search_bar_container">
             <span>
-                <form action="/{{current_user_data.username}}/search" method="post">
+                <form action="/user_id={{current_user_data.username}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
                         <input name='user_query' type="text" class="search_box" placeholder="Find people...">
                         <button type="submit"><img src="/static/images/search.png"></button>
@@ -25,9 +25,9 @@
             </span>
         </div>
         <div id="options" class="options_container">
-            <a href=" /{{current_user_data.username}}/account" class="options_link">
+            <a href=" /user_id={{current_user_data.username}}/account" class="options_link">
                 <span class="options_text">My Profile | </span></a>
-            <a href=" /{{current_user_data.username}}" class="options_link">
+            <a href=" /user_id={{current_user_data.username}}" class="options_link">
                 <span class="options_text">My Dashboard | </span></a>
             <a href="/" class="options_link"><span class="options_text">Logout</span></a>
         </div>
@@ -40,7 +40,7 @@
                 Edit your post
             </div>
             <div class="new_post">
-                <form action="/{{current_user_data.username}}/{{post_data.id}}/edit_post" method="post"
+                <form action="/user_id={{current_user_data.username}}/{{post_data.id}}/edit_post" method="post"
                     enctype="multipart/form-data">
 
                     <textarea class="post_title_input" type="text" name="post_title"

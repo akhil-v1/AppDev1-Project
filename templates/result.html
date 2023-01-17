@@ -16,7 +16,7 @@
         </div>
         <div id="search_bar" class="search_bar_container">
             <span>
-                <form action="/{{current_user}}/search" method="post">
+                <form action="/user_id={{current_user}}/search" method="post">
                     <div style="height: 40px; vertical-align: middle;">
                         <input name='user_query' type="text" class="search_box" placeholder="Find people...">
                         <button type="submit"><img src="/static/images/search.png"></button>
@@ -25,9 +25,9 @@
             </span>
         </div>
         <div id="options" class="options_container">
-            <a href=" /{{current_user}}/account" class="options_link">
+            <a href=" /user_id={{current_user}}/account" class="options_link">
                 <span class="options_text">My Profile | </span></a>
-            <a href=" /{{current_user}}" class="options_link">
+            <a href=" /user_id={{current_user}}" class="options_link">
                 <span class="options_text">My Dashboard | </span></a>
             <a href="/" class="options_link">
                 <span class="options_text">Logout</span></a>
@@ -46,11 +46,11 @@
                     <div class="post_title">
                         {% for user_data in user_query_data %}
                         {% if user_data.username == current_user%}
-                        <a href="/{{current_user}}/account"
+                        <a href="/user_id={{current_user}}/account"
                             style="text-decoration: none; color: blue;">{{user_data.last_name}},
                             {{user_data.first_name}} ({{user_data.username}})</a> <br>
                         {%else%}
-                        <a href="/{{current_user}}/{{user_data.username}}/profile"
+                        <a href="/user_id={{current_user}}/{{user_data.username}}/profile"
                             style="text-decoration: none; color: blue;">{{user_data.last_name}},
                             {{user_data.first_name}} ({{user_data.username}})</a> <br>
                         {%endif%}
