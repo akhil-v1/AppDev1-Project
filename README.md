@@ -137,7 +137,7 @@ https://BlogLite.akhilvashistha.repl.co
 
 - **Name : Akhil Vashistha**
 - **Roll Number : 21f3001417**
-- **Student Email : 21f3001417@student.onlinedegree.iitm.ac.in**
+- **Student Email : 21f3001417@ds.study.iitm.ac.in**
 
 ####  Thanks
 
